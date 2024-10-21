@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Specifies the JavaScript version output.
+    "module": "commonjs", // ensures that TypeScript generates JavaScript code compatible with Node.js and adheres to the CommonJS module loading pattern.
+    "lib": [
+      "ES2022",
+      "dom"
+    ], // Include ES2022 features and DOM types
+    "outDir": "./docs", // Directory for compiled JavaScript files.
+    "rootDir": "./src", // Directory containing your TypeScript files.
+    "strict": true, // Enables all strict type-checking options for better code quality.
+    "noUnusedLocals": true, // Will be error if there are any local variables declared but not used within the scope.
+    "noImplicitAny": true, // function will show error if not define by type.
+    "noUnusedParameters": true, // Will be error if there are any parameters in functions or methods that are not used within the function body.
+    "noEmitOnError": true, // prevents TypeScript from generating output (JavaScript files) if there are any type checking or compilation errors.
+    "esModuleInterop": true, // When set to true, it enables interoperability between ES6 modules and CommonJS modules.For example, it allows "import express from 'express';".
+    "skipLibCheck": true, // Skips type checking of all declaration files (`.d.ts`).
+    "forceConsistentCasingInFileNames": true, // Ensures consistent file naming between imports and file paths.
+    "sourceMap": true, // Include source maps in the bundle for debugging with webpack
+  },
+  "include": [
+    "src/**/*.ts",
+    "declarations.d.ts"
+  ], // Specifies which files or directories should be included in the TypeScript project. "src/**/*.ts" specify the TypeScript files that should be compiled.
+  "exclude": [
+    "node_modules"
+  ] // Excludes the `node_modules` folder from compilation to improve performance.
+}
