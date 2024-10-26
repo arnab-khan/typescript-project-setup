@@ -1,5 +1,6 @@
 const path = require('path'); // Node.js utility for handling and transforming file paths.
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Plugin to generate HTML files for the Webpack bundles.
+const autoprefixer = require('autoprefixer'); // Import autoprefixer
 
 module.exports = {
   mode: 'development', // Sets the mode to 'development', which enables debugging and detailed error messages.
@@ -25,7 +26,21 @@ module.exports = {
       },
       {
         test: /\.scss$/, // Matches all SCSS files.
-        use: ['style-loader', 'css-loader', 'sass-loader'], // Processes SCSS into CSS, injects CSS into the DOM using 'style-loader'.
+        use: [
+          'style-loader', // Adds CSS to the DOM by injecting a `<style>` tag
+          'css-loader', // Interprets `@import` and `url()` like `import/require()` and will resolve them
+          'sass-loader', // Compiles SCSS/Sass files into standard CSS. This is needed because you are using SCSS files for styles in your project.
+          {
+            loader: 'postcss-loader', // Loader for webpack to process CSS with PostCSS
+            options: {
+              postcssOptions: {
+                plugins: [
+                  autoprefixer // Adds vendor prefixes to CSS for better browser compatibility, based on the browserslist configuration.
+                ]
+              }
+            }
+          }
+        ],
       },
     ],
   },
