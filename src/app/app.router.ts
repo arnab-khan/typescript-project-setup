@@ -9,7 +9,7 @@ import { AppMainComponent } from "./components/main/main.component";
 
 
 const routerLinkList: { [x: string]: any } = {
-    'home': new AppHomeComponent,
+    '': new AppHomeComponent,
     'card-list': new AppCardListComponent,
     'create-card': new AppCreateCardComponent,
     'card-detail': new AppCardDetailComponent,
@@ -32,18 +32,16 @@ function removeElement() {
 }
 
 export function navigateTo(route: string) {
-    history.pushState({}, '', `#${route}`); // Change the URL without reloading the page
-    removeElement();
     const component = routerLinkList[route];
     if (component) {
+        removeElement();
+        history.pushState({}, '', `#${route}`); // Change the URL without reloading the page
         component?.render(); //render component based on router
     }
 }
 
 export function renderRouter() {
     document.body.addEventListener('click', (event: any) => {
-        console.log(event.target);
-
         if (event.target.matches('.menu-item')) {
             const route = event.target.getAttribute('data-route');
             navigateTo(route)
