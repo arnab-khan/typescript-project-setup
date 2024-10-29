@@ -1,0 +1,16 @@
+.error-message {
+    display: none;
+    font-size: 1rem;
+}
+
+.error {
+
+    input,
+    textarea {
+        border-color: #dc3545;
+    }
+
+    .error-message {
+        display: block;
+    }
+}

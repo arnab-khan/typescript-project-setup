@@ -31,8 +31,11 @@ button {
     color: inherit;
 }
 
-input {
+input,
+textarea {
     outline: none;
+    border: 0.063rem solid gray;
+    border-radius: .3rem;
 }
 
 ul {
