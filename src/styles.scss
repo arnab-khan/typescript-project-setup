@@ -35,7 +35,7 @@ input,
 textarea {
     outline: none;
     border: 0.063rem solid gray;
-    border-radius: .3rem;
+    border-radius: 0.375rem;
 }
 
 ul {
@@ -73,7 +73,18 @@ strong {
 
 .container-1 {
     width: calc(10vw + 86rem);
-    max-width: 100%;
+}
+
+.container-2 {
+    width: calc(7vw + 40rem);
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.pointer-events-none {
+    pointer-events: none;
 }
 
 // ==================== End common class ====================

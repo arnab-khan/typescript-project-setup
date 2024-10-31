@@ -6,11 +6,9 @@ import './card-list.component.scss';
 export class AppCardListComponent {
     render(): void {
         addTemplateToElementBasedOnId('app-card-list', template);
-        getCard()
-            .then(card => {
-                console.log(card); // Handle the resolved value here
-            })
-
+        getCard().then(card => {
+            console.log(card); // Handle the resolved value here
+        })
     }
 
 }  
