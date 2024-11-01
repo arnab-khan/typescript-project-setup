@@ -1,0 +1,23 @@
+#card-list {
+    .image-wrap {
+        padding-top: 100%;
+    }
+
+    .description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+}
+
+.explore-button {
+    background-color: #007bff;
+    color: #fff;
+    border: 0.125rem solid #155724;
+
+    &:hover {
+        background-color: #28a745;
+    }
+}

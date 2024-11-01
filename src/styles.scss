@@ -29,6 +29,7 @@ button {
     cursor: pointer;
     font: inherit;
     color: inherit;
+    transition-duration: .3s;
 }
 
 input,
@@ -72,7 +73,7 @@ strong {
 // ==================== Start common class ====================
 
 .container-1 {
-    width: calc(10vw + 86rem);
+    width: calc(50vw + 40rem);
 }
 
 .container-2 {

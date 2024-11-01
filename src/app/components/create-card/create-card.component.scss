@@ -36,7 +36,9 @@ label {
     }
 }
 
-#submit-btn {
-    font-size: 1.2rem;
-    font-weight: 600;
+#submit-btn-wrap {
+    #submit-btn {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
 }

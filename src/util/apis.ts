@@ -1,7 +1,7 @@
 const storeFolderName = 'cards';
 const apiUrl='https://create-cards-1-default-rtdb.firebaseio.com';
 
-export async function getCard() {
+export async function getCards() {
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}.json`); // fetch API itself returns a promise
         if (!response.ok) {
