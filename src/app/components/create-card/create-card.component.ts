@@ -40,7 +40,7 @@ export class AppCreateCardComponent {
             this.startLoader();
             postCard(this.apiBody).then(response => {
                 console.log('Added data:', response);
-                navigateTo('card-list')
+                navigateTo('card-list', null);
             });
         }
     }

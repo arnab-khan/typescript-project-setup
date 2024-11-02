@@ -1,23 +1,33 @@
-#card-list {
-    .image-wrap {
-        padding-top: 100%;
+.card-list-section {
+    #loader {
+        margin-top: calc(50vh - 10rem);
+
+        img {
+            height: 5rem;
+        }
     }
 
-    .description {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        line-clamp: 3;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
+    #card-list {
+        .image-wrap {
+            padding-top: 100%;
+        }
+
+        .description {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
     }
-}
 
-.explore-button {
-    background-color: #007bff;
-    color: #fff;
-    border: 0.125rem solid #155724;
+    .explore-button {
+        background-color: #007bff;
+        color: #fff;
+        border: 0.125rem solid #155724;
 
-    &:hover {
-        background-color: #28a745;
+        &:hover {
+            background-color: #28a745;
+        }
     }
 }

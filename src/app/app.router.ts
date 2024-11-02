@@ -1,3 +1,4 @@
+import { getRouterInformation } from "../util/render.util";
 import { AppComponent } from "./app.component";
 import { AppCardDetailComponent } from "./components/card-detail/card-detail.component";
 import { AppCardListComponent } from "./components/card-list/card-list.component";
@@ -31,20 +32,21 @@ function removeElement() {
     })
 }
 
-export function navigateTo(route: string) {
+export function navigateTo(route: string, id: string | undefined | null) {
     const component = routerLinkList[route];
     if (component) {
         removeElement();
-        history.pushState({}, '', `#${route}`); // Change the URL without reloading the page
+        history.pushState({}, '', `#${route}${id ? `?id=${id}` : ''}`); // Change the URL without reloading the page
         component?.render(); //render component based on router
     }
 }
 
 export function renderRouter() {
     document.body.addEventListener('click', (event: any) => {
-        if (event.target.matches('.menu-item')) {
-            const route = event.target.getAttribute('data-route');
-            navigateTo(route)
+        if (event.target.matches('.router-element')) {
+            const route = event.target.getAttribute('data-route') || '';
+            const id = event.target.getAttribute('data-id');
+            navigateTo(route, id);
         }
     });
 }
@@ -59,6 +61,16 @@ export function loadComponents(): void {
 }
 
 function initialPageLoad() {
-    const router = window.location.hash.replace('#', '');
-    navigateTo(router);
+    const urlInformation = getRouterInformation();
+    navigateTo(urlInformation[0], urlInformation[1]);
+    window.addEventListener('popstate', changeRouterBasedOnHistory);
+}
+
+function changeRouterBasedOnHistory() {
+    const urlInformation = getRouterInformation();
+    const component = routerLinkList[urlInformation[0]];
+    if (component) {
+        removeElement();
+        component?.render(); //render component based on router
+    }
 }

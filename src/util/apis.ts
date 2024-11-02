@@ -1,13 +1,30 @@
-const storeFolderName = 'cards';
-const apiUrl='https://create-cards-1-default-rtdb.firebaseio.com';
+import { Card, Cards } from "../app/interfaces/cards";
 
-export async function getCards() {
+const storeFolderName = 'cards';
+const apiUrl = 'https://create-cards-1-default-rtdb.firebaseio.com';
+
+export async function getCard(id: string) {
     try {
-        const response = await fetch(`${apiUrl}/${storeFolderName}.json`); // fetch API itself returns a promise
+        const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`); // Fetch a specific card by ID
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
-        const data = await response.json(); // Returns a promise that resolves with the result of parsing the body text as JSON
+        const data: Card = await response.json();
+        // console.log('Fetched single card:', data);
+        return data; // Returns the specific card data
+    } catch (error) {
+        console.error('Error fetching single card:', error);
+    }
+}
+
+
+export async function getCards() {
+    try {
+        const response = await fetch(`${apiUrl}/${storeFolderName}.json`); // Fetch API itself returns a promise
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data: Cards = await response.json(); // Returns a promise that resolves with the result of parsing the body text as JSON
         // console.log('Fetched data:', data);
         return data;
     } catch (error) {
@@ -16,7 +33,7 @@ export async function getCards() {
 }
 
 
-export async function postCard(newData: any) {
+export async function postCard(newData: Card) {
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}.json`, {
             method: 'POST',

@@ -11,13 +11,16 @@ export class AppCardListComponent {
     }
 
     getCardsFromApi() {
-        getCards().then((response: Cards) => {
+        getCards().then((response: Cards|undefined) => {
             console.log('card-list', response);
-            const cardList = Object.entries(response).map(element => {
-                return Object.assign(element[1], { id: element[0] })
-            }).reverse();
-            console.log('cardList', cardList);
-            this.addCards(cardList);
+            if (response) {
+                const cardList = Object.entries(response).map(element => {
+                    return Object.assign(element[1], { id: element[0] })
+                }).reverse();
+                console.log('cardList', cardList);
+                this.addCards(cardList);
+            }
+            this.hideLoader();
         })
     }
 
@@ -31,13 +34,13 @@ export class AppCardListComponent {
                         <div class="position-relative image-wrap">
                             <img src="${card.imageLink || placeholderSrc}" alt="${card.title} "class="w-100 h-100 top-0 start-0 object-fit-cover position-absolute">
                         </div>
-                        <div class="p-2 d-flex flex-column flex-grow-1">
+                        <div class="p-3 d-flex flex-column flex-grow-1">
                             <div class="flex-grow-1">
                                 <h2>${card.title}</h2>
                                 <p class="mt-2 description">${card.description}</p>
                             </div>
                             <div class="mt-3">
-                                <button data-route="${card.id}" class="rounded-2 px-2 py-1 d-block explore-button">Explore</button>
+                                <button data-route="card-detail" data-id="${encodeURIComponent(card?.id || '-')}" class="rounded-2 px-2 py-1 d-block router-element explore-button">Explore</button>
                             </div>
                         </div>
                     </div>
@@ -45,5 +48,10 @@ export class AppCardListComponent {
             `).join('');
             cardListElement.innerHTML = htmlCardsContent;
         }
+    }
+
+    hideLoader() {
+        const loaderElement = document.getElementById('loader');
+        loaderElement?.classList?.add('d-none');
     }
 }  
