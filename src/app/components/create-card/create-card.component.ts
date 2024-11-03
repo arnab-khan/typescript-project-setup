@@ -1,10 +1,12 @@
-import { postCard } from '../../../util/apis';
-import { addTemplateToElementBasedOnId } from '../../../util/render.util';
+import { editCard, getCard, postCard } from '../../../util/apis';
+import { addTemplateToElementBasedOnId, getRouterInformation } from '../../../util/render.util';
 import { navigateTo } from '../../app.router';
+import { Card } from '../../interfaces/cards';
 import template from './create-card.component.html';
 import './create-card.component.scss';
 
 export class AppCreateCardComponent {
+    cardId = '';
     apiBody: { [x: string]: string } = {};
     submitButton: HTMLElement | null | undefined;
     form: HTMLElement | null | undefined;
@@ -12,7 +14,31 @@ export class AppCreateCardComponent {
 
     render(): void {
         addTemplateToElementBasedOnId('app-create-card', template);
-        this.addEventListeners()
+        this.addEventListeners();
+        this.getCardFromApi();
+    }
+
+    getCardFromApi() {
+        this.cardId = getRouterInformation()[1];
+        getCard(this.cardId).then((response: Card | undefined) => {
+            console.log('card', response);
+            this.patchValue(response);
+        })
+    }
+
+    patchValue(card: Card | undefined) {
+        const title = (document.querySelector('[name="title"]') as HTMLInputElement);
+        const description = (document.querySelector('[name="description"]') as HTMLInputElement);
+        const imageLink = (document.querySelector('[name="imageLink"]') as HTMLInputElement);
+        if (title) {
+            title.value = card?.title || '';
+        }
+        if (description) {
+            description.value = card?.description || '';
+        }
+        if (imageLink) {
+            imageLink.value = card?.imageLink || '';
+        }
     }
 
     addEventListeners(): void {
@@ -22,7 +48,7 @@ export class AppCreateCardComponent {
         }
         this.form = document.getElementById('card-form');
         if (this.form) {
-            this.form.addEventListener('input', this.patchValue.bind(this));
+            this.form.addEventListener('input', this.changeInput.bind(this));
         }
     }
 
@@ -38,7 +64,13 @@ export class AppCreateCardComponent {
             // window.alert('Enter all required fields');
         } else {
             this.startLoader();
-            postCard(this.apiBody).then(response => {
+            let api: Promise<any>;
+            if (this.cardId) {
+                api = editCard(this.cardId, this.apiBody);
+            } else {
+                api = postCard(this.apiBody);
+            }
+            api.then(response => {
                 console.log('Added data:', response);
                 navigateTo('card-list', null);
             });
@@ -56,7 +88,7 @@ export class AppCreateCardComponent {
         }
     }
 
-    patchValue() {
+    changeInput() {
         this.createApiBody();
         this.allErrorHandle();
     }

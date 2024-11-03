@@ -42,15 +42,51 @@ export async function postCard(newData: Card) {
             },
             body: JSON.stringify(newData)
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
-
         const data = await response.json();
         // console.log('Added data:', data);
         return data;
     } catch (error) {
         console.error('Error adding data:', error);
+    }
+}
+
+export async function editCard(id: string, updatedData: any) {
+    try {
+        const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`, {
+            method: 'PATCH', // Use PATCH to update only specific fields
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        // console.log('Edited data:', data);
+        return data;
+    } catch (error) {
+        console.error('Error updating data:', error);
+    }
+}
+
+
+export async function deleteCard(id: string) {
+    try {
+        const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        // console.log('Delete data:', data);
+        return data;
+    } catch (error) {
+        console.error('Error deleting data:', error);
     }
 }
