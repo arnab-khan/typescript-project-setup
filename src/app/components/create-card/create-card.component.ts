@@ -14,16 +14,20 @@ export class AppCreateCardComponent {
 
     render(): void {
         addTemplateToElementBasedOnId('app-create-card', template);
+        this.cardId = getRouterInformation()[1];
         this.addEventListeners();
         this.getCardFromApi();
     }
 
     getCardFromApi() {
-        this.cardId = getRouterInformation()[1];
-        getCard(this.cardId).then((response: Card | undefined) => {
-            console.log('card', response);
-            this.patchValue(response);
-        })
+        if (this.cardId) {
+            this.showHideLoader(true);
+            getCard(this.cardId).then((response: Card | undefined) => {
+                console.log('card', response);
+                this.patchValue(response);
+                this.showHideLoader(false);
+            })
+        }
     }
 
     patchValue(card: Card | undefined) {
@@ -136,4 +140,16 @@ export class AppCreateCardComponent {
         submitButtonSpinner?.classList?.remove('d-none');
         this.form?.classList?.add('pointer-events-none')
     }
-}  
+
+    showHideLoader(show: boolean) {
+        const loaderElement = document.querySelector('.create-card-section .main-loader');
+        const cardFormElement = document.querySelector('.create-card-section #card-form');
+        if (show) {
+            loaderElement?.classList?.remove('d-none');
+            cardFormElement?.classList?.add('d-none');
+        } else {
+            loaderElement?.classList?.add('d-none');
+            cardFormElement?.classList?.remove('d-none');
+        }
+    }
+}

@@ -1,7 +1,20 @@
 <section class="card-detail-section">
-    <div class="px-3 px-md-4 px-xl-5 py-4 py-lg-5 container-1 mx-auto mw-100 text-center">
+    <div class="main-loader">
+        <img src="../../../assets/images/spinner-primary.svg" alt="loader" class="d-block mx-auto">
+    </div>
+    <div class="px-3 px-md-4 px-xl-5 py-4 py-lg-5 container-1 mx-auto mw-100 text-center d-none content">
         <img src="../../../assets/images/image-placeholder.svg" alt="banner image" id="image" class="mw-100">
         <h1 id="title" class="mt-4 text-black"></h1>
         <p id="description" class="mt-4 text-dark"></p>
+        <div id="buttons" class="d-flex justify-content-center mt-5">
+            <button type="button" class="rounded-pill px-2 px-lg-3 py-1 py-lg-2 edit">
+                <img src="../../../assets/images/edit.svg" alt="edit" id="edit">
+                <span class="ps-1 ps-lg-2 text-primary">Edit</span>
+            </button>
+            <button type="button" class="ms-3 ms-lg-4 rounded-pill px-2 px-lg-3 py-1 py-lg-2 delete">
+                <img src="../../../assets/images/delete.svg" alt="delete" id="delete">
+                <span class="ps-1 ps-lg-2 text-danger">Delete</span>
+            </button>
+        </div>
     </div>
 </section>

@@ -45,10 +45,10 @@ export class AppCardListComponent {
                             <div class="mt-3 d-flex align-items-center justify-content-between">
                                 <button data-route="card-detail" data-id="${encodeURIComponent(card?.id || '-')}" class="rounded-2 px-2 py-1 d-block router-element explore-button">Explore</button>
                                 <div class="d-flex align-items-center">
-                                    <button data-route="edit-card" data-id="${encodeURIComponent(card?.id || '-')}" class="router-element">
+                                    <button type="button" data-route="edit-card" data-id="${encodeURIComponent(card?.id || '-')}" class="router-element">
                                         <img src="${editSrc}" alt="edit">
                                     </button>
-                                    <button delete-id="${card?.id}">
+                                    <button type="button" delete-id="${card?.id}">
                                         <img src="${deleteSrc}" alt="delete" class="ms-2">
                                     </button>
                                 </div>
@@ -83,7 +83,7 @@ export class AppCardListComponent {
     }
 
     hideLoader() {
-        const loaderElement = document.getElementById('loader');
+        const loaderElement = document.querySelector('.card-list-section .main-loader');
         loaderElement?.classList?.add('d-none');
     }
 }  

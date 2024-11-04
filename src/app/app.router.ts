@@ -55,6 +55,7 @@ export function renderRouter() {
                 const route = target.getAttribute('data-route') || '';
                 const id = target.getAttribute('data-id');
                 navigateTo(route, id);
+                setActiveClassForRouter();
             });
 
             // Add the element to the set to mark it as having a listener
@@ -77,6 +78,7 @@ function initialPageLoad() {
     const urlInformation = getRouterInformation();
     navigateTo(urlInformation[0], urlInformation[1]);
     window.addEventListener('popstate', changeRouterBasedOnHistory);
+    setActiveClassForRouter();
 }
 
 function changeRouterBasedOnHistory() {
@@ -86,4 +88,18 @@ function changeRouterBasedOnHistory() {
         removeElement();
         component?.render(); //render component based on router
     }
+}
+
+function setActiveClassForRouter() {
+    const activeRouterClass = 'router-active';
+    const routerElements = document.querySelectorAll('[data-route]');
+    const urlInformation = getRouterInformation();
+    routerElements.forEach(element => {
+        const route = element.getAttribute('data-route');
+        if (urlInformation[0] == route) {
+            element.classList.add(activeRouterClass);
+        } else {
+            element.classList.remove(activeRouterClass);
+        }
+    });
 }

@@ -88,6 +88,18 @@ strong {
     pointer-events: none;
 }
 
+.router-active {
+    text-decoration: underline;
+}
+
+.main-loader {
+    margin-top: calc(50vh - 10rem);
+
+    img {
+        height: 5rem;
+    }
+}
+
 // ==================== End common class ====================
 
 
