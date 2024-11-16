@@ -4,12 +4,23 @@
             padding-top: 100%;
         }
 
-        .description {
+        @mixin line-clamp($lines) {
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            line-clamp: 3;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: $lines;
+            line-clamp: $lines;
             overflow: hidden;
+        }
+
+        .title {
+            @include line-clamp(1);
+            font-size: 1.5rem;
+        }
+
+        .description {
+            @include line-clamp(3);
+            font-size: 1.1rem;
+            color: grey;
         }
     }
 
@@ -25,6 +36,7 @@
 
     #no-card {
         margin-top: calc(50vh - 16rem);
+
         span {
             font-size: 2rem;
             font-weight: 600;

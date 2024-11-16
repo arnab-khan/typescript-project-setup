@@ -42,6 +42,7 @@ export function navigateTo(route: string, id: string | undefined | null) { // mo
         removeElement(); // remove older component
         history.pushState({}, '', `#${route}${id ? `?id=${id}` : ''}`); // Change the URL without reloading the page and id added as a params
         component?.render(); // here 'render()' present indide each component which responsiable to add 'innerHTML' of component inside correspond parents element based on id. If any function present inside 'render()' of class then that will also run
+        setActiveClassForRouter();
     } else {
         navigateTo('page-not-found', null);
     }
@@ -57,7 +58,6 @@ export function renderRouter() { // This function has used to find 'data-route a
                 const route = target.getAttribute('data-route') || ''; // get 'data-route' attribute value
                 const id = target.getAttribute('data-id'); // get 'data-id' attribute value if present
                 navigateTo(route, id);
-                setActiveClassForRouter();
             });
             elementsWithListener.add(element); // Add the element to the set to mark it as having a listener
         }
@@ -87,6 +87,7 @@ function changeRouterBasedOnHistory() { // This function call when router change
     if (component) {
         removeElement(); // remove older component
         component?.render(); // render component based on router
+        setActiveClassForRouter();
     }
 }
 

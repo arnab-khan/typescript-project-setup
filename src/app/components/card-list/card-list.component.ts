@@ -49,7 +49,7 @@ export class AppCardListComponent {
                         </div>
                         <div class="p-3 d-flex flex-column flex-grow-1">
                             <div class="flex-grow-1">
-                                <h2>${card?.title}</h2>
+                                <h2 class="title">${card?.title}</h2>
                                 <p class="mt-2 description">${card?.description}</p>
                             </div>
                             <div class="mt-3 d-flex align-items-center justify-content-between">

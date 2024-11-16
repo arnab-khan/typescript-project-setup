@@ -12,8 +12,13 @@ The application allows users to create, edit, and delete cards.
 
 ## Running the Application Locally
 
+npm install
 npm start
 
 ## Building for Production
 
 npm run build
+
+## Check It Out!
+
+You can view the deployed application here: https://arnab-khan.github.io/typescript-project-setup

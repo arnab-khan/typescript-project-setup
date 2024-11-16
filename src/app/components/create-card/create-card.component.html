@@ -8,7 +8,7 @@
                 Title
                 <span class="text-danger">*</span>
             </label>
-            <input type="text" id="title" class="mt-2 w-100 px-3 py-2 bg-white" name="title">
+            <input type="text" id="title" class="mt-2 w-100 px-3 py-2 bg-white" name="title" maxlength="100">
             <div class="text-danger mt-2 error-message">
                 Title is required.
             </div>
@@ -18,7 +18,8 @@
                 Description
                 <span class="text-danger">*</span>
             </label>
-            <textarea id="description" class="mt-2 w-100 px-3 py-2 bg-white" name="description"></textarea>
+            <textarea id="description" class="mt-2 w-100 px-3 py-2 bg-white" name="description"
+                maxlength="500"></textarea>
             <div class="text-danger mt-2 error-message">
                 Description is required.
             </div>
@@ -27,7 +28,7 @@
             <label for="image-link">
                 Image Link (not mandatory)
             </label>
-            <input type="text" id="image-link" class="mt-2 w-100 px-3 py-2 bg-white" name="imageLink">
+            <input type="text" id="image-link" class="mt-2 w-100 px-3 py-2 bg-white" name="imageLink" maxlength="500">
             <div class="text-danger mt-2 error-message">
                 It seems the link you've provided isn't pointing to a valid image. Please ensure that the URL starts
                 with http:// or https:// and ends with a recognized image format like .jpg, .jpeg, .png, .gif, .bmp,
@@ -35,7 +36,7 @@
             </div>
         </div>
         <div id="submit-btn-wrap" class="mt-5 position-relative mx-auto width-fit-content">
-            <button type="button" id="submit-btn" class="bg-primary text-white p-4 py-3 rounded-2 d-block">
+            <button type="button" id="submit-btn" class="text-white p-4 py-3 rounded-2 d-block">
                 Submit
             </button>
             <img src="../../../assets/images/spinner-primary.svg" alt="spinner" id="submit-btn-spinner"
