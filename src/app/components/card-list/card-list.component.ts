@@ -1,31 +1,41 @@
 import { deleteCard, getCards } from '../../../util/apis';
 import { addTemplateToElementBasedOnId } from '../../../util/render.util';
-import { renderRouter } from '../../app.router';
+import { navigateTo, renderRouter } from '../../app.router';
 import { Cards, Card } from '../../interfaces/cards';
-import template from './card-list.component.html';
-import './card-list.component.scss';
+import template from './card-list.component.html'; // 'template' contain html of this component. Setup done at declarations.d.ts file
+import './card-list.component.scss'; // This line imports the SCSS file of this component for processing by the Webpack. The processed CSS is automatically injected into the page when the app runs. Setup done at declarations.d.ts file
 
 export class AppCardListComponent {
-    render(): void {
-        addTemplateToElementBasedOnId('app-card-list', template);
+
+    noOfCard = 0;
+
+    render(): void { // This function will call during router change at 'app.module.ts' file to load 'template' and will also call 'this.getCardsFromApi()'
+        addTemplateToElementBasedOnId('app-card-list', template); // 'template' has 'html' code of this component
         this.getCardsFromApi();
     }
 
     getCardsFromApi() {
-        getCards().then((response: Cards | undefined) => {
+        getCards().then((response: Cards | undefined) => { // getting cards by api
             console.log('card-list', response);
             if (response) {
-                const cardList = Object.entries(response).map(element => {
+                const cardList = Object.entries(response)?.map(element => {
                     return Object.assign(element[1], { id: element[0] })
                 }).reverse();
                 // console.log('cardList', cardList);
-                this.addCards(cardList);
+                this.noOfCard = cardList?.length || 0;
+                if (this.noOfCard) {
+                    this.addCards(cardList);
+                } else {
+                    this.noCard();
+                }
+            } else {
+                this.noCard();
             }
             this.hideLoader();
         })
     }
 
-    addCards(cards: Card[]) {
+    addCards(cards: Card[]) { // This function has used to add cards details inside html
         const cardListElement = document.getElementById('card-list');
         if (cardListElement) {
             const placeholderImageSrc = (document.getElementById('placeholder-image') as HTMLImageElement)?.src;
@@ -58,31 +68,46 @@ export class AppCardListComponent {
                 </li>
             `).join('');
             cardListElement.innerHTML = htmlCardsContent;
-            renderRouter();
+            renderRouter(); // refresh router because here inside card has used router attribute (data-id)
             this.addDeleteFunction(cardListElement);
         }
     }
 
-    addDeleteFunction(cardListElement: HTMLElement) {
+    addDeleteFunction(cardListElement: HTMLElement) { // Added a delete function at delete button for each card.
         cardListElement.querySelectorAll('.card-item').forEach(card => {
-            const button=card.querySelector('[delete-id]');
+            const button = card.querySelector('[delete-id]');
             if (button) {
                 button.addEventListener('click', this.deleteCardByApi.bind(this, button, card));
             }
         });
     }
 
-    deleteCardByApi(buttonElement: Element, cardElement:Element) {
+    deleteCardByApi(buttonElement: Element, cardElement: Element) { // On click a delete card api will call
         const cardId = buttonElement.getAttribute('delete-id');
         if (cardId) {
-            deleteCard(cardId).then(response => {
-                console.log('delete card', response);
-                cardElement?.classList?.add('d-none');
-            });
+            cardElement?.classList?.add('d-none');
+            this.noOfCard--;
+            if (!this.noOfCard) {
+                this.noCard();
+            }
+            deleteCard(cardId); // calling delete card api
         }
     }
 
-    hideLoader() {
+    noCard() { // Has used to show empty state, that is if no card present.
+        const noCardElement = document.querySelector('.card-list-section #no-card');
+        if (noCardElement) {
+            noCardElement?.classList?.remove('d-none');
+            const buttonElement = noCardElement.querySelector('button'); // Inside empty state element a create card button present.
+            if (buttonElement) {
+                buttonElement.addEventListener('click', function () { // Added a function to create button on click will navigate to 'create-card' router
+                    navigateTo('create-card', null);
+                });
+            }
+        }
+    }
+
+    hideLoader() { // When initially load page a loader present. After call this function loader will hide
         const loaderElement = document.querySelector('.card-list-section .main-loader');
         loaderElement?.classList?.add('d-none');
     }

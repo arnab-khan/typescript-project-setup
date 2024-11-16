@@ -1,9 +1,9 @@
 import { Card, Cards } from "../app/interfaces/cards";
 
-const storeFolderName = 'cards';
-const apiUrl = 'https://create-cards-1-default-rtdb.firebaseio.com';
+const storeFolderName = 'cards'; // This folder created inside firebase database
+const apiUrl = 'https://create-cards-1-default-rtdb.firebaseio.com'; // API url for firebase database
 
-export async function getCard(id: string) {
+export async function getCard(id: string) { // Get card details for a single card
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`); // Fetch a specific card by ID
         if (!response.ok) {
@@ -18,7 +18,7 @@ export async function getCard(id: string) {
 }
 
 
-export async function getCards() {
+export async function getCards() {  // Get all card list
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}.json`); // Fetch API itself returns a promise
         if (!response.ok) {
@@ -33,7 +33,7 @@ export async function getCards() {
 }
 
 
-export async function postCard(newData: Card) {
+export async function postCard(newData: Card) { // Create a new card
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}.json`, {
             method: 'POST',
@@ -53,10 +53,10 @@ export async function postCard(newData: Card) {
     }
 }
 
-export async function editCard(id: string, updatedData: any) {
+export async function editCard(id: string, updatedData: any) { // Change existing single card
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`, {
-            method: 'PATCH', // Use PATCH to update only specific fields
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -74,7 +74,7 @@ export async function editCard(id: string, updatedData: any) {
 }
 
 
-export async function deleteCard(id: string) {
+export async function deleteCard(id: string) { // Delete single card
     try {
         const response = await fetch(`${apiUrl}/${storeFolderName}/${id}.json`, {
             method: 'DELETE'

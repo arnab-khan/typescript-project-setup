@@ -70,7 +70,7 @@ strong {
 
 
 
-// ==================== Start common class ====================
+// ==================== Start common classes ====================
 
 .container-1 {
     width: calc(50vw + 40rem);
@@ -100,13 +100,13 @@ strong {
     }
 }
 
-// ==================== End common class ====================
+// ==================== End common classes ====================
 
 
 
 html {
     font-family: "Poppins", sans-serif;
-    font-size: calc(0.125vw + 13.6px); //responsive font size 16px for 1920px screen and 14px for 320px screen
+    font-size: calc(0.125vw + 13.6px); // responsive font size 1rem = 16px for 1920px screen and 1rem = 14px for 320px screen
 
     body {
         font: inherit;

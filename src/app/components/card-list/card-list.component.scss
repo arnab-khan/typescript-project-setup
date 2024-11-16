@@ -22,4 +22,22 @@
             background-color: #28a745;
         }
     }
+
+    #no-card {
+        margin-top: calc(50vh - 16rem);
+        span {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        button {
+            font-size: 1.5rem;
+            font-weight: 400;
+            background-color: #007bff;
+
+            &:hover {
+                background-color: #28a745;
+            }
+        }
+    }
 }

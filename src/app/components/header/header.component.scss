@@ -5,4 +5,12 @@
             font-weight: 600;
         }
     }
+
+    .create-card-button {
+        background-color: #007bff;
+
+        &:hover {
+            background-color: #28a745;
+        }
+    }
 }

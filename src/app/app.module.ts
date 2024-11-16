@@ -4,7 +4,7 @@ export class AppModule {
   constructor() {
   }
 
-  bootstrap(){
-    loadComponents();
+  bootstrap() { // initiall load of app
+    loadComponents(); // initial point of router at app.router.ts file
   }
 }

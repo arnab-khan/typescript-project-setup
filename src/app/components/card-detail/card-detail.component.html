@@ -7,14 +7,18 @@
         <h1 id="title" class="mt-4 text-black"></h1>
         <p id="description" class="mt-4 text-dark"></p>
         <div id="buttons" class="d-flex justify-content-center mt-5">
-            <button type="button" class="rounded-pill px-2 px-lg-3 py-1 py-lg-2 edit">
-                <img src="../../../assets/images/edit.svg" alt="edit" id="edit">
+            <button type="button" class="rounded-pill overflow-hidden px-2 px-lg-3 py-1 py-lg-2" id="edit">
+                <img src="../../../assets/images/edit.svg" alt="edit">
                 <span class="ps-1 ps-lg-2 text-primary">Edit</span>
             </button>
-            <button type="button" class="ms-3 ms-lg-4 rounded-pill px-2 px-lg-3 py-1 py-lg-2 delete">
-                <img src="../../../assets/images/delete.svg" alt="delete" id="delete">
-                <span class="ps-1 ps-lg-2 text-danger">Delete</span>
-            </button>
+            <div class="position-relative width-fit-contentms-3 ms-lg-4 rounded-pill overflow-hidden" id="delete">
+                <button type="button" class="px-2 px-lg-3 py-1 py-lg-2">
+                    <img src="../../../assets/images/delete.svg" alt="delete">
+                    <span class="ps-1 ps-lg-2 text-danger">Delete</span>
+                </button>
+                <img src="../../../assets/images/spinner-primary.svg" alt="spinner" id="delete-btn-spinner"
+                    class="position-absolute top-50 start-50 translate-middle d-none">
+            </div>
         </div>
     </div>
 </section>
